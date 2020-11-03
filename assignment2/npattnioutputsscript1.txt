@@ -1,0 +1,128 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SHOW DATABASES
+--------------
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| npattniassign2db   |
+| performance_schema |
+| vetoffice          |
++--------------------+
+5 rows in set (0.00 sec)
+
+--------------
+DROP DATABASE IF EXISTS npattniassign2db
+--------------
+
+Query OK, 3 rows affected (0.31 sec)
+
+--------------
+CREATE DATABASE npattniassign2db
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+GRANT USAGE ON *.* TO 'ta'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+GRANT ALL PRIVILEGES ON npattniassign2db.* TO 'ta'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+SHOW TABLES
+--------------
+
+Empty set (0.00 sec)
+
+--------------
+CREATE TABLE WesternCourse(
+	CourseName VARCHAR(50) NOT NULL,
+	CourseNumber CHAR(6) NOT NULL,
+	Weight CHAR(3) NOT NULL,
+	Suffix CHAR(1),
+	PRIMARY KEY(CourseNumber) )
+--------------
+
+Query OK, 0 rows affected (0.05 sec)
+
+--------------
+CREATE TABLE University(
+	OfficialName VARCHAR(50) NOT NULL,
+	City VARCHAR(20) NOT NULL,
+	Province CHAR(2) NOT NULL,
+	Nickname VARCHAR(20) NOT NULL,
+	UniversityID CHAR(2) NOT NULL,
+	PRIMARY KEY(UniversityID) )
+--------------
+
+Query OK, 0 rows affected (0.06 sec)
+
+--------------
+CREATE TABLE OtherCourse(
+	CourseName VARCHAR(50) NOT NULL,
+	CourseCode CHAR(10) NOT NULL,
+	Weight CHAR(3) NOT NULL,
+	YearOffered CHAR(1) NOT NULL,
+	UniversityID CHAR(2),
+	PRIMARY KEY(CourseCode),
+	FOREIGN KEY(UniversityID) REFERENCES University(UniversityID) ON DELETE SET NULL )
+--------------
+
+Query OK, 0 rows affected (0.05 sec)
+
+--------------
+CREATE TABLE EquivalentCourses(
+	WesternCourse CHAR(6),
+	OutsideCourse CHAR(10),
+	University CHAR(2),
+	DateDecided VARCHAR(12) NOT NULL,
+	FOREIGN KEY(WesternCourse) REFERENCES WesternCourse(CourseNumber) ON DELETE SET NULL,
+	FOREIGN KEY(OutsideCourse) REFERENCES OtherCourse(CourseCode) ON DELETE SET NULL,
+	FOREIGN KEY(University) REFERENCES University(UniversityID) ON DELETE SET NULL )
+--------------
+
+Query OK, 0 rows affected (0.27 sec)
+
+--------------
+SHOW TABLES
+--------------
+
++----------------------------+
+| Tables_in_npattniassign2db |
++----------------------------+
+| EquivalentCourses          |
+| OtherCourse                |
+| University                 |
+| WesternCourse              |
++----------------------------+
+4 rows in set (0.00 sec)
+
+Bye

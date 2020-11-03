@@ -13,15 +13,15 @@ CREATE TABLE WesternCourse(
 	CourseName VARCHAR(50) NOT NULL,
 	CourseNumber CHAR(6) NOT NULL,
 	Weight CHAR(3) NOT NULL,
-	Suffix CHAR(1),
+	Suffix VARCHAR(3),
 	PRIMARY KEY(CourseNumber) );
 
 CREATE TABLE University(
+	UniversityID VARCHAR(2) NOT NULL,
 	OfficialName VARCHAR(50) NOT NULL,
 	City VARCHAR(20) NOT NULL,
 	Province CHAR(2) NOT NULL,
 	Nickname VARCHAR(20) NOT NULL,
-	UniversityID CHAR(2) NOT NULL,
 	PRIMARY KEY(UniversityID) );
 
 CREATE TABLE OtherCourse(
@@ -29,14 +29,14 @@ CREATE TABLE OtherCourse(
 	CourseCode CHAR(10) NOT NULL,
 	Weight CHAR(3) NOT NULL,
 	YearOffered CHAR(1) NOT NULL,
-	UniversityID CHAR(2),
+	UniversityID VARCHAR(2),
 	PRIMARY KEY(CourseCode),
 	FOREIGN KEY(UniversityID) REFERENCES University(UniversityID) ON DELETE SET NULL );
 
 CREATE TABLE EquivalentCourses(
 	WesternCourse CHAR(6),
 	OutsideCourse CHAR(10),
-	University CHAR(2),
+	University VARCHAR(2),
 	DateDecided VARCHAR(12) NOT NULL,
 	FOREIGN KEY(WesternCourse) REFERENCES WesternCourse(CourseNumber) ON DELETE SET NULL,
 	FOREIGN KEY(OutsideCourse) REFERENCES OtherCourse(CourseCode) ON DELETE SET NULL,

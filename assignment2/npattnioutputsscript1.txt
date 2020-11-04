@@ -12,19 +12,19 @@ SHOW DATABASES
 | performance_schema |
 | vetoffice          |
 +--------------------+
-5 rows in set (0.01 sec)
+5 rows in set (0.00 sec)
 
 --------------
 DROP DATABASE IF EXISTS npattniassign2db
 --------------
 
-Query OK, 4 rows affected (0.10 sec)
+Query OK, 4 rows affected (0.11 sec)
 
 --------------
 CREATE DATABASE npattniassign2db
 --------------
 
-Query OK, 1 row affected (0.00 sec)
+Query OK, 1 row affected (0.01 sec)
 
 --------------
 GRANT USAGE ON *.* TO 'ta'@'localhost'
@@ -42,7 +42,7 @@ Query OK, 0 rows affected (0.00 sec)
 CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
 --------------
 
-Query OK, 0 rows affected (0.01 sec)
+Query OK, 0 rows affected (0.00 sec)
 
 --------------
 GRANT ALL PRIVILEGES ON npattniassign2db.* TO 'ta'@'localhost'
@@ -83,7 +83,7 @@ CREATE TABLE University(
 	PRIMARY KEY(UniversityID) )
 --------------
 
-Query OK, 0 rows affected (0.14 sec)
+Query OK, 0 rows affected (0.22 sec)
 
 --------------
 CREATE TABLE OtherCourse(
@@ -95,7 +95,7 @@ CREATE TABLE OtherCourse(
 	FOREIGN KEY(UniversityID) REFERENCES University(UniversityID) ON DELETE SET NULL )
 --------------
 
-Query OK, 0 rows affected (0.12 sec)
+Query OK, 0 rows affected (0.10 sec)
 
 --------------
 CREATE TABLE EquivalentCourses(
@@ -107,7 +107,7 @@ CREATE TABLE EquivalentCourses(
 	FOREIGN KEY(University) REFERENCES University(UniversityID) ON DELETE SET NULL )
 --------------
 
-Query OK, 0 rows affected (0.10 sec)
+Query OK, 0 rows affected (0.06 sec)
 
 --------------
 SHOW TABLES

@@ -1,0 +1,572 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SHOW DATABASES
+--------------
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| npattniassign2db   |
+| performance_schema |
+| vetoffice          |
++--------------------+
+5 rows in set (0.00 sec)
+
+--------------
+SHOW TABLES
+--------------
+
++----------------------------+
+| Tables_in_npattniassign2db |
++----------------------------+
+| EquivalentCourses          |
+| OtherCourse                |
+| University                 |
+| WesternCourse              |
++----------------------------+
+4 rows in set (0.00 sec)
+
+--------------
+SELECT CourseName FROM WesternCourse
+--------------
+
++---------------------------------------------+
+| CourseName                                  |
++---------------------------------------------+
+| Intro to Coding using Pascal and Fortran    |
+| Computer Science Fundamentals I             |
+| Computer Science Fundamentals II            |
+| Modern Survival Skills I: Coding Essentials |
+| Algorithms and Data Structures              |
+| Databases I                                 |
+| Thesis                                      |
+| Introduction to Fullstack Development       |
++---------------------------------------------+
+8 rows in set (0.00 sec)
+
+--------------
+SELECT Distinct(CourseCode) FROM OtherCourse
+--------------
+
++------------+
+| CourseCode |
++------------+
+| CompSci022 |
+| CompSci033 |
+| CompSci021 |
+| Compsci222 |
+| CompSci023 |
+| CompSci011 |
+| CompSci123 |
+| CompSci319 |
+| CompSci333 |
+| CompSci444 |
+| Compsci101 |
+| CompSci293 |
+| CompSci499 |
++------------+
+13 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM WesternCourse ORDER BY CourseName ASC
+--------------
+
++---------------------------------------------+--------------+--------+--------+
+| CourseName                                  | CourseNumber | Weight | Suffix |
++---------------------------------------------+--------------+--------+--------+
+| Algorithms and Data Structures              | cs2210       | 1.0    | A/B    |
+| Computer Science Fundamentals I             | cs1026       | 0.5    | A/B    |
+| Computer Science Fundamentals II            | cs1027       | 0.5    | A/B    |
+| Databases I                                 | cs3319       | 0.5    | A/B    |
+| Intro to Coding using Pascal and Fortran    | cs0020       | 1.0    |        |
+| Introduction to Fullstack Development       | cs9999       | 1.0    | F/G    |
+| Modern Survival Skills I: Coding Essentials | cs2120       | 0.5    | A/B    |
+| Thesis                                      | cs4490       | 0.5    | Z      |
++---------------------------------------------+--------------+--------+--------+
+8 rows in set (0.00 sec)
+
+--------------
+SELECT CourseNumber, CourseName FROM WesternCourse WHERE Weight="0.5"
+--------------
+
++--------------+---------------------------------------------+
+| CourseNumber | CourseName                                  |
++--------------+---------------------------------------------+
+| cs1026       | Computer Science Fundamentals I             |
+| cs1027       | Computer Science Fundamentals II            |
+| cs2120       | Modern Survival Skills I: Coding Essentials |
+| cs3319       | Databases I                                 |
+| cs4490       | Thesis                                      |
++--------------+---------------------------------------------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT CourseCode, CourseName FROM OtherCourse WHERE UniversityID="2"
+--------------
+
++------------+---------------------------------------+
+| CourseCode | CourseName                            |
++------------+---------------------------------------+
+| CompSci022 | Introduction to Programming           |
+| CompSci033 | Intro to Programming for Med students |
+| CompSci021 | Packages                              |
+| Compsci222 | Introduction to Databases             |
+| CompSci023 | Advanced Programming                  |
++------------+---------------------------------------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT OtherCourse.CourseName,University.Nickname FROM OtherCourse,University WHERE LEFT(OtherCourse.CourseName,12)="Introduction" AND OtherCourse.UniversityID=University.UniversityID
+--------------
+
++---------------------------------------+----------+
+| CourseName                            | Nickname |
++---------------------------------------+----------+
+| Introduction to Programming           | UofT     |
+| Introduction to Databases             | UofT     |
+| Introduction to Using Data Structures | Laurier  |
++---------------------------------------+----------+
+3 rows in set (0.00 sec)
+
+--------------
+SELECT OtherCourse.CourseName,University.OfficialName,EquivalentCourses.WesternCourse,EquivalentCourses.DateDecided FROM OtherCourse,University,EquivalentCourses
+	WHERE SUBSTRING(EquivalentCourses.DateDecided,-4,4)<SUBSTRING(DATE_SUB(CURDATE(), INTERVAL -5 YEAR), 1, 4)
+	AND EquivalentCourses.OutsideCourse=OtherCourse.CourseCode AND EquivalentCourses.University=University.UniversityID
+--------------
+
++---------------------------------------+--------------------------------+---------------+--------------+
+| CourseName                            | OfficialName                   | WesternCourse | DateDecided  |
++---------------------------------------+--------------------------------+---------------+--------------+
+| Introduction to Programming           | University Of Toronto          | cs1026        | May 12, 2015 |
+| Introduction to Programming           | University Of Toronto          | cs2120        | Dec 10, 2018 |
+| Introduction to Programming           | University Of Toronto          | cs0020        | Sep 19, 2018 |
+| Introduction to Programming           | University of British Columbia | cs1027        | Sep 1, 2019  |
+| Intro to Programming for Med students | University Of Toronto          | cs1026        | Jan 2, 2013  |
+| Packages                              | University of British Columbia | cs1026        | Jan 12, 2010 |
+| Introduction to Databases             | University Of Toronto          | cs3319        | Sep 13, 1990 |
+| Advanced Programming                  | University Of Toronto          | cs1027        | Jun 22, 2017 |
+| Intro to Computer Science             | University of Waterloo         | cs1026        | Feb 9, 1997  |
+| Intro Programming                     | University of British Columbia | cs1026        | Jan 12, 2010 |
+| Advanced Programming                  | University Of Toronto          | cs1026        | May 12, 2015 |
+| Advanced Programming                  | University Of Toronto          | cs2120        | Dec 10, 2018 |
+| Advanced Programming                  | University Of Toronto          | cs0020        | Sep 19, 2018 |
+| Advanced Programming                  | University of British Columbia | cs1027        | Sep 1, 2019  |
+| Using Databases                       | University of British Columbia | cs3319        | Sep 21, 1987 |
+| Using Packages                        | University Of Toronto          | cs1026        | May 12, 2015 |
+| Using Packages                        | University Of Toronto          | cs2120        | Dec 10, 2018 |
+| Using Packages                        | University Of Toronto          | cs0020        | Sep 19, 2018 |
+| Using Packages                        | University of British Columbia | cs1027        | Sep 1, 2019  |
+| Introduction to Using Data Structures | Wilfred Laurier University     | cs2210        | Jul 12, 1998 |
++---------------------------------------+--------------------------------+---------------+--------------+
+20 rows in set (0.01 sec)
+
+--------------
+SELECT OtherCourse.CourseName,University.Nickname FROM OtherCourse,University,EquivalentCourses
+	WHERE EquivalentCourses.WesternCourse="cs1026" AND EquivalentCourses.University=University.UniversityID AND EquivalentCourses.OutsideCourse=OtherCourse.CourseCode
+--------------
+
++---------------------------------------+----------+
+| CourseName                            | Nickname |
++---------------------------------------+----------+
+| Introduction to Programming           | UofT     |
+| Intro to Programming for Med students | UofT     |
+| Packages                              | UBC      |
+| Intro to Computer Science             | Waterloo |
+| Intro Programming                     | UBC      |
+| Advanced Programming                  | UofT     |
+| Using Packages                        | UofT     |
++---------------------------------------+----------+
+7 rows in set (0.00 sec)
+
+--------------
+SELECT COUNT(WesternCourse) FROM EquivalentCourses WHERE WesternCourse="cs1026"
+--------------
+
++----------------------+
+| COUNT(WesternCourse) |
++----------------------+
+|                    4 |
++----------------------+
+1 row in set (0.00 sec)
+
+--------------
+SELECT WesternCourse.CourseName,OtherCourse.CourseName,University.Nickname FROM EquivalentCourses,WesternCourse,OtherCourse,University
+	WHERE EquivalentCourses.University=University.UniversityID AND University.City="Waterloo"
+--------------
+
++---------------------------------------------+---------------------------------------+----------+
+| CourseName                                  | CourseName                            | Nickname |
++---------------------------------------------+---------------------------------------+----------+
+| Intro to Coding using Pascal and Fortran    | Introduction to Programming           | Waterloo |
+| Computer Science Fundamentals I             | Introduction to Programming           | Waterloo |
+| Computer Science Fundamentals II            | Introduction to Programming           | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Introduction to Programming           | Waterloo |
+| Algorithms and Data Structures              | Introduction to Programming           | Waterloo |
+| Databases I                                 | Introduction to Programming           | Waterloo |
+| Thesis                                      | Introduction to Programming           | Waterloo |
+| Introduction to Fullstack Development       | Introduction to Programming           | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Introduction to Programming           | Laurier  |
+| Computer Science Fundamentals I             | Introduction to Programming           | Laurier  |
+| Computer Science Fundamentals II            | Introduction to Programming           | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Introduction to Programming           | Laurier  |
+| Algorithms and Data Structures              | Introduction to Programming           | Laurier  |
+| Databases I                                 | Introduction to Programming           | Laurier  |
+| Thesis                                      | Introduction to Programming           | Laurier  |
+| Introduction to Fullstack Development       | Introduction to Programming           | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Intro to Programming for Med students | Waterloo |
+| Computer Science Fundamentals I             | Intro to Programming for Med students | Waterloo |
+| Computer Science Fundamentals II            | Intro to Programming for Med students | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Intro to Programming for Med students | Waterloo |
+| Algorithms and Data Structures              | Intro to Programming for Med students | Waterloo |
+| Databases I                                 | Intro to Programming for Med students | Waterloo |
+| Thesis                                      | Intro to Programming for Med students | Waterloo |
+| Introduction to Fullstack Development       | Intro to Programming for Med students | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Intro to Programming for Med students | Laurier  |
+| Computer Science Fundamentals I             | Intro to Programming for Med students | Laurier  |
+| Computer Science Fundamentals II            | Intro to Programming for Med students | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Intro to Programming for Med students | Laurier  |
+| Algorithms and Data Structures              | Intro to Programming for Med students | Laurier  |
+| Databases I                                 | Intro to Programming for Med students | Laurier  |
+| Thesis                                      | Intro to Programming for Med students | Laurier  |
+| Introduction to Fullstack Development       | Intro to Programming for Med students | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Packages                              | Waterloo |
+| Computer Science Fundamentals I             | Packages                              | Waterloo |
+| Computer Science Fundamentals II            | Packages                              | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Packages                              | Waterloo |
+| Algorithms and Data Structures              | Packages                              | Waterloo |
+| Databases I                                 | Packages                              | Waterloo |
+| Thesis                                      | Packages                              | Waterloo |
+| Introduction to Fullstack Development       | Packages                              | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Packages                              | Laurier  |
+| Computer Science Fundamentals I             | Packages                              | Laurier  |
+| Computer Science Fundamentals II            | Packages                              | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Packages                              | Laurier  |
+| Algorithms and Data Structures              | Packages                              | Laurier  |
+| Databases I                                 | Packages                              | Laurier  |
+| Thesis                                      | Packages                              | Laurier  |
+| Introduction to Fullstack Development       | Packages                              | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Introduction to Databases             | Waterloo |
+| Computer Science Fundamentals I             | Introduction to Databases             | Waterloo |
+| Computer Science Fundamentals II            | Introduction to Databases             | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Introduction to Databases             | Waterloo |
+| Algorithms and Data Structures              | Introduction to Databases             | Waterloo |
+| Databases I                                 | Introduction to Databases             | Waterloo |
+| Thesis                                      | Introduction to Databases             | Waterloo |
+| Introduction to Fullstack Development       | Introduction to Databases             | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Introduction to Databases             | Laurier  |
+| Computer Science Fundamentals I             | Introduction to Databases             | Laurier  |
+| Computer Science Fundamentals II            | Introduction to Databases             | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Introduction to Databases             | Laurier  |
+| Algorithms and Data Structures              | Introduction to Databases             | Laurier  |
+| Databases I                                 | Introduction to Databases             | Laurier  |
+| Thesis                                      | Introduction to Databases             | Laurier  |
+| Introduction to Fullstack Development       | Introduction to Databases             | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Advanced Programming                  | Waterloo |
+| Computer Science Fundamentals I             | Advanced Programming                  | Waterloo |
+| Computer Science Fundamentals II            | Advanced Programming                  | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Advanced Programming                  | Waterloo |
+| Algorithms and Data Structures              | Advanced Programming                  | Waterloo |
+| Databases I                                 | Advanced Programming                  | Waterloo |
+| Thesis                                      | Advanced Programming                  | Waterloo |
+| Introduction to Fullstack Development       | Advanced Programming                  | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Advanced Programming                  | Laurier  |
+| Computer Science Fundamentals I             | Advanced Programming                  | Laurier  |
+| Computer Science Fundamentals II            | Advanced Programming                  | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Advanced Programming                  | Laurier  |
+| Algorithms and Data Structures              | Advanced Programming                  | Laurier  |
+| Databases I                                 | Advanced Programming                  | Laurier  |
+| Thesis                                      | Advanced Programming                  | Laurier  |
+| Introduction to Fullstack Development       | Advanced Programming                  | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Intro to Computer Science             | Waterloo |
+| Computer Science Fundamentals I             | Intro to Computer Science             | Waterloo |
+| Computer Science Fundamentals II            | Intro to Computer Science             | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Intro to Computer Science             | Waterloo |
+| Algorithms and Data Structures              | Intro to Computer Science             | Waterloo |
+| Databases I                                 | Intro to Computer Science             | Waterloo |
+| Thesis                                      | Intro to Computer Science             | Waterloo |
+| Introduction to Fullstack Development       | Intro to Computer Science             | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Intro to Computer Science             | Laurier  |
+| Computer Science Fundamentals I             | Intro to Computer Science             | Laurier  |
+| Computer Science Fundamentals II            | Intro to Computer Science             | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Intro to Computer Science             | Laurier  |
+| Algorithms and Data Structures              | Intro to Computer Science             | Laurier  |
+| Databases I                                 | Intro to Computer Science             | Laurier  |
+| Thesis                                      | Intro to Computer Science             | Laurier  |
+| Introduction to Fullstack Development       | Intro to Computer Science             | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Using UNIX                            | Waterloo |
+| Computer Science Fundamentals I             | Using UNIX                            | Waterloo |
+| Computer Science Fundamentals II            | Using UNIX                            | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Using UNIX                            | Waterloo |
+| Algorithms and Data Structures              | Using UNIX                            | Waterloo |
+| Databases I                                 | Using UNIX                            | Waterloo |
+| Thesis                                      | Using UNIX                            | Waterloo |
+| Introduction to Fullstack Development       | Using UNIX                            | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Using UNIX                            | Laurier  |
+| Computer Science Fundamentals I             | Using UNIX                            | Laurier  |
+| Computer Science Fundamentals II            | Using UNIX                            | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Using UNIX                            | Laurier  |
+| Algorithms and Data Structures              | Using UNIX                            | Laurier  |
+| Databases I                                 | Using UNIX                            | Laurier  |
+| Thesis                                      | Using UNIX                            | Laurier  |
+| Introduction to Fullstack Development       | Using UNIX                            | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Intro Programming                     | Waterloo |
+| Computer Science Fundamentals I             | Intro Programming                     | Waterloo |
+| Computer Science Fundamentals II            | Intro Programming                     | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Intro Programming                     | Waterloo |
+| Algorithms and Data Structures              | Intro Programming                     | Waterloo |
+| Databases I                                 | Intro Programming                     | Waterloo |
+| Thesis                                      | Intro Programming                     | Waterloo |
+| Introduction to Fullstack Development       | Intro Programming                     | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Intro Programming                     | Laurier  |
+| Computer Science Fundamentals I             | Intro Programming                     | Laurier  |
+| Computer Science Fundamentals II            | Intro Programming                     | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Intro Programming                     | Laurier  |
+| Algorithms and Data Structures              | Intro Programming                     | Laurier  |
+| Databases I                                 | Intro Programming                     | Laurier  |
+| Thesis                                      | Intro Programming                     | Laurier  |
+| Introduction to Fullstack Development       | Intro Programming                     | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Advanced Programming                  | Waterloo |
+| Computer Science Fundamentals I             | Advanced Programming                  | Waterloo |
+| Computer Science Fundamentals II            | Advanced Programming                  | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Advanced Programming                  | Waterloo |
+| Algorithms and Data Structures              | Advanced Programming                  | Waterloo |
+| Databases I                                 | Advanced Programming                  | Waterloo |
+| Thesis                                      | Advanced Programming                  | Waterloo |
+| Introduction to Fullstack Development       | Advanced Programming                  | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Advanced Programming                  | Laurier  |
+| Computer Science Fundamentals I             | Advanced Programming                  | Laurier  |
+| Computer Science Fundamentals II            | Advanced Programming                  | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Advanced Programming                  | Laurier  |
+| Algorithms and Data Structures              | Advanced Programming                  | Laurier  |
+| Databases I                                 | Advanced Programming                  | Laurier  |
+| Thesis                                      | Advanced Programming                  | Laurier  |
+| Introduction to Fullstack Development       | Advanced Programming                  | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Using Databases                       | Waterloo |
+| Computer Science Fundamentals I             | Using Databases                       | Waterloo |
+| Computer Science Fundamentals II            | Using Databases                       | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Using Databases                       | Waterloo |
+| Algorithms and Data Structures              | Using Databases                       | Waterloo |
+| Databases I                                 | Using Databases                       | Waterloo |
+| Thesis                                      | Using Databases                       | Waterloo |
+| Introduction to Fullstack Development       | Using Databases                       | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Using Databases                       | Laurier  |
+| Computer Science Fundamentals I             | Using Databases                       | Laurier  |
+| Computer Science Fundamentals II            | Using Databases                       | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Using Databases                       | Laurier  |
+| Algorithms and Data Structures              | Using Databases                       | Laurier  |
+| Databases I                                 | Using Databases                       | Laurier  |
+| Thesis                                      | Using Databases                       | Laurier  |
+| Introduction to Fullstack Development       | Using Databases                       | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Graphics                              | Waterloo |
+| Computer Science Fundamentals I             | Graphics                              | Waterloo |
+| Computer Science Fundamentals II            | Graphics                              | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Graphics                              | Waterloo |
+| Algorithms and Data Structures              | Graphics                              | Waterloo |
+| Databases I                                 | Graphics                              | Waterloo |
+| Thesis                                      | Graphics                              | Waterloo |
+| Introduction to Fullstack Development       | Graphics                              | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Graphics                              | Laurier  |
+| Computer Science Fundamentals I             | Graphics                              | Laurier  |
+| Computer Science Fundamentals II            | Graphics                              | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Graphics                              | Laurier  |
+| Algorithms and Data Structures              | Graphics                              | Laurier  |
+| Databases I                                 | Graphics                              | Laurier  |
+| Thesis                                      | Graphics                              | Laurier  |
+| Introduction to Fullstack Development       | Graphics                              | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Networks                              | Waterloo |
+| Computer Science Fundamentals I             | Networks                              | Waterloo |
+| Computer Science Fundamentals II            | Networks                              | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Networks                              | Waterloo |
+| Algorithms and Data Structures              | Networks                              | Waterloo |
+| Databases I                                 | Networks                              | Waterloo |
+| Thesis                                      | Networks                              | Waterloo |
+| Introduction to Fullstack Development       | Networks                              | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Networks                              | Laurier  |
+| Computer Science Fundamentals I             | Networks                              | Laurier  |
+| Computer Science Fundamentals II            | Networks                              | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Networks                              | Laurier  |
+| Algorithms and Data Structures              | Networks                              | Laurier  |
+| Databases I                                 | Networks                              | Laurier  |
+| Thesis                                      | Networks                              | Laurier  |
+| Introduction to Fullstack Development       | Networks                              | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Using Packages                        | Waterloo |
+| Computer Science Fundamentals I             | Using Packages                        | Waterloo |
+| Computer Science Fundamentals II            | Using Packages                        | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Using Packages                        | Waterloo |
+| Algorithms and Data Structures              | Using Packages                        | Waterloo |
+| Databases I                                 | Using Packages                        | Waterloo |
+| Thesis                                      | Using Packages                        | Waterloo |
+| Introduction to Fullstack Development       | Using Packages                        | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Using Packages                        | Laurier  |
+| Computer Science Fundamentals I             | Using Packages                        | Laurier  |
+| Computer Science Fundamentals II            | Using Packages                        | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Using Packages                        | Laurier  |
+| Algorithms and Data Structures              | Using Packages                        | Laurier  |
+| Databases I                                 | Using Packages                        | Laurier  |
+| Thesis                                      | Using Packages                        | Laurier  |
+| Introduction to Fullstack Development       | Using Packages                        | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Introduction to Using Data Structures | Waterloo |
+| Computer Science Fundamentals I             | Introduction to Using Data Structures | Waterloo |
+| Computer Science Fundamentals II            | Introduction to Using Data Structures | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Introduction to Using Data Structures | Waterloo |
+| Algorithms and Data Structures              | Introduction to Using Data Structures | Waterloo |
+| Databases I                                 | Introduction to Using Data Structures | Waterloo |
+| Thesis                                      | Introduction to Using Data Structures | Waterloo |
+| Introduction to Fullstack Development       | Introduction to Using Data Structures | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Introduction to Using Data Structures | Laurier  |
+| Computer Science Fundamentals I             | Introduction to Using Data Structures | Laurier  |
+| Computer Science Fundamentals II            | Introduction to Using Data Structures | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Introduction to Using Data Structures | Laurier  |
+| Algorithms and Data Structures              | Introduction to Using Data Structures | Laurier  |
+| Databases I                                 | Introduction to Using Data Structures | Laurier  |
+| Thesis                                      | Introduction to Using Data Structures | Laurier  |
+| Introduction to Fullstack Development       | Introduction to Using Data Structures | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Intro to CompSci                      | Waterloo |
+| Computer Science Fundamentals I             | Intro to CompSci                      | Waterloo |
+| Computer Science Fundamentals II            | Intro to CompSci                      | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Intro to CompSci                      | Waterloo |
+| Algorithms and Data Structures              | Intro to CompSci                      | Waterloo |
+| Databases I                                 | Intro to CompSci                      | Waterloo |
+| Thesis                                      | Intro to CompSci                      | Waterloo |
+| Introduction to Fullstack Development       | Intro to CompSci                      | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Intro to CompSci                      | Laurier  |
+| Computer Science Fundamentals I             | Intro to CompSci                      | Laurier  |
+| Computer Science Fundamentals II            | Intro to CompSci                      | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Intro to CompSci                      | Laurier  |
+| Algorithms and Data Structures              | Intro to CompSci                      | Laurier  |
+| Databases I                                 | Intro to CompSci                      | Laurier  |
+| Thesis                                      | Intro to CompSci                      | Laurier  |
+| Introduction to Fullstack Development       | Intro to CompSci                      | Laurier  |
+| Intro to Coding using Pascal and Fortran    | Advanced CompSci                      | Waterloo |
+| Computer Science Fundamentals I             | Advanced CompSci                      | Waterloo |
+| Computer Science Fundamentals II            | Advanced CompSci                      | Waterloo |
+| Modern Survival Skills I: Coding Essentials | Advanced CompSci                      | Waterloo |
+| Algorithms and Data Structures              | Advanced CompSci                      | Waterloo |
+| Databases I                                 | Advanced CompSci                      | Waterloo |
+| Thesis                                      | Advanced CompSci                      | Waterloo |
+| Introduction to Fullstack Development       | Advanced CompSci                      | Waterloo |
+| Intro to Coding using Pascal and Fortran    | Advanced CompSci                      | Laurier  |
+| Computer Science Fundamentals I             | Advanced CompSci                      | Laurier  |
+| Computer Science Fundamentals II            | Advanced CompSci                      | Laurier  |
+| Modern Survival Skills I: Coding Essentials | Advanced CompSci                      | Laurier  |
+| Algorithms and Data Structures              | Advanced CompSci                      | Laurier  |
+| Databases I                                 | Advanced CompSci                      | Laurier  |
+| Thesis                                      | Advanced CompSci                      | Laurier  |
+| Introduction to Fullstack Development       | Advanced CompSci                      | Laurier  |
++---------------------------------------------+---------------------------------------+----------+
+256 rows in set (0.00 sec)
+
+--------------
+SELECT University.OfficialName FROM EquivalentCourses,University WHERE University.UniversityID!=EquivalentCourses.University
+--------------
+
++--------------------------------+
+| OfficialName                   |
++--------------------------------+
+| Not A University               |
+| Concordia University           |
+| University of Waterloo         |
+| McMaster University            |
+| University of British Columbia |
+| Wilfred Laurier University     |
+| McGill University              |
+| Not A University               |
+| Concordia University           |
+| University of Waterloo         |
+| McMaster University            |
+| University of British Columbia |
+| Wilfred Laurier University     |
+| McGill University              |
+| Not A University               |
+| Concordia University           |
+| University of Waterloo         |
+| McMaster University            |
+| University of British Columbia |
+| Wilfred Laurier University     |
+| McGill University              |
+| Not A University               |
+| Concordia University           |
+| University of Waterloo         |
+| McMaster University            |
+| University of British Columbia |
+| Wilfred Laurier University     |
+| McGill University              |
+| Not A University               |
+| Concordia University           |
+| University of Waterloo         |
+| McMaster University            |
+| University of British Columbia |
+| Wilfred Laurier University     |
+| McGill University              |
+| Not A University               |
+| Concordia University           |
+| University of Waterloo         |
+| McMaster University            |
+| University of British Columbia |
+| Wilfred Laurier University     |
+| McGill University              |
+| Not A University               |
+| University Of Toronto          |
+| Concordia University           |
+| McMaster University            |
+| University of British Columbia |
+| Wilfred Laurier University     |
+| McGill University              |
+| Not A University               |
+| University Of Toronto          |
+| Concordia University           |
+| University of Waterloo         |
+| McMaster University            |
+| Wilfred Laurier University     |
+| McGill University              |
+| Not A University               |
+| University Of Toronto          |
+| Concordia University           |
+| University of Waterloo         |
+| McMaster University            |
+| Wilfred Laurier University     |
+| McGill University              |
+| Not A University               |
+| University Of Toronto          |
+| Concordia University           |
+| University of Waterloo         |
+| McMaster University            |
+| Wilfred Laurier University     |
+| McGill University              |
+| Not A University               |
+| University Of Toronto          |
+| Concordia University           |
+| University of Waterloo         |
+| McMaster University            |
+| University of British Columbia |
+| McGill University              |
++--------------------------------+
+77 rows in set (0.00 sec)
+
+--------------
+SELECT WesternCourse.CourseName,EquivalentCourses.WesternCourse FROM WesternCourse,EquivalentCourses,OtherCourse
+	WHERE EquivalentCourses.OutsideCourse=OtherCourse.CourseCode AND (OtherCourse.YearOffered="3" OR OtherCourse.YearOffered="4")
+--------------
+
++---------------------------------------------+---------------+
+| CourseName                                  | WesternCourse |
++---------------------------------------------+---------------+
+| Intro to Coding using Pascal and Fortran    | cs3319        |
+| Computer Science Fundamentals I             | cs3319        |
+| Computer Science Fundamentals II            | cs3319        |
+| Modern Survival Skills I: Coding Essentials | cs3319        |
+| Algorithms and Data Structures              | cs3319        |
+| Databases I                                 | cs3319        |
+| Thesis                                      | cs3319        |
+| Introduction to Fullstack Development       | cs3319        |
++---------------------------------------------+---------------+
+8 rows in set (0.00 sec)
+
+ERROR 1064 (42000) at line 35: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE COUNT(WesternCourse)>1' at line 1
+--------------
+SELECT WesternCourse FROM EquivalentCourses GROUP BY OutsideCourse WHERE COUNT(WesternCourse)>1
+--------------
+
+Bye

@@ -1,0 +1,357 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SHOW DATABASES
+--------------
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| npattniassign2db   |
+| performance_schema |
+| vetoffice          |
++--------------------+
+5 rows in set (0.00 sec)
+
+--------------
+SHOW TABLES
+--------------
+
++----------------------------+
+| Tables_in_npattniassign2db |
++----------------------------+
+| EquivalentCourses          |
+| OtherCourse                |
+| University                 |
+| WesternCourse              |
++----------------------------+
+4 rows in set (0.00 sec)
+
+--------------
+CREATE VIEW NewView AS SELECT OtherCourse.CourseCode,University.OfficialName,University.Nickname,University.City,WesternCourse.CourseName
+	FROM EquivalentCourses,OtherCourse,University,WesternCourse
+	WHERE OtherCourse.YearOffered="1" AND OtherCourse.CourseCode=EquivalentCourses.OutsideCourse AND EquivalentCourses.WesternCourse=WesternCourse.CourseNumber
+--------------
+
+Query OK, 0 rows affected (0.02 sec)
+
+--------------
+SELECT * FROM NewView
+--------------
+
++------------+--------------------------------+----------+-----------+---------------------------------------------+
+| CourseCode | OfficialName                   | Nickname | City      | CourseName                                  |
++------------+--------------------------------+----------+-----------+---------------------------------------------+
+| CompSci022 | Not A University               | NAU      | Nowhere   | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | University Of Toronto          | UofT     | Toronto   | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | Concordia University           | Concord  | Montreal  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | University of Waterloo         | Waterloo | Waterloo  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | McMaster University            | Mac      | Hamilton  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | Wilfred Laurier University     | Laurier  | Waterloo  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | McGill University              | McGill   | Montreal  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals I             |
+| CompSci022 | University Of Toronto          | UofT     | Toronto   | Computer Science Fundamentals I             |
+| CompSci022 | Concordia University           | Concord  | Montreal  | Computer Science Fundamentals I             |
+| CompSci022 | University of Waterloo         | Waterloo | Waterloo  | Computer Science Fundamentals I             |
+| CompSci022 | McMaster University            | Mac      | Hamilton  | Computer Science Fundamentals I             |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals I             |
+| CompSci022 | Wilfred Laurier University     | Laurier  | Waterloo  | Computer Science Fundamentals I             |
+| CompSci022 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals I             |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals II            |
+| CompSci022 | University Of Toronto          | UofT     | Toronto   | Computer Science Fundamentals II            |
+| CompSci022 | Concordia University           | Concord  | Montreal  | Computer Science Fundamentals II            |
+| CompSci022 | University of Waterloo         | Waterloo | Waterloo  | Computer Science Fundamentals II            |
+| CompSci022 | McMaster University            | Mac      | Hamilton  | Computer Science Fundamentals II            |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals II            |
+| CompSci022 | Wilfred Laurier University     | Laurier  | Waterloo  | Computer Science Fundamentals II            |
+| CompSci022 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals II            |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | University Of Toronto          | UofT     | Toronto   | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | Concordia University           | Concord  | Montreal  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | University of Waterloo         | Waterloo | Waterloo  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | McMaster University            | Mac      | Hamilton  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | Wilfred Laurier University     | Laurier  | Waterloo  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | McGill University              | McGill   | Montreal  | Modern Survival Skills I: Coding Essentials |
+| CompSci033 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals I             |
+| CompSci033 | University Of Toronto          | UofT     | Toronto   | Computer Science Fundamentals I             |
+| CompSci033 | Concordia University           | Concord  | Montreal  | Computer Science Fundamentals I             |
+| CompSci033 | University of Waterloo         | Waterloo | Waterloo  | Computer Science Fundamentals I             |
+| CompSci033 | McMaster University            | Mac      | Hamilton  | Computer Science Fundamentals I             |
+| CompSci033 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals I             |
+| CompSci033 | Wilfred Laurier University     | Laurier  | Waterloo  | Computer Science Fundamentals I             |
+| CompSci033 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals I             |
+| Compsci222 | Not A University               | NAU      | Nowhere   | Databases I                                 |
+| Compsci222 | University Of Toronto          | UofT     | Toronto   | Databases I                                 |
+| Compsci222 | Concordia University           | Concord  | Montreal  | Databases I                                 |
+| Compsci222 | University of Waterloo         | Waterloo | Waterloo  | Databases I                                 |
+| Compsci222 | McMaster University            | Mac      | Hamilton  | Databases I                                 |
+| Compsci222 | University of British Columbia | UBC      | Vancouver | Databases I                                 |
+| Compsci222 | Wilfred Laurier University     | Laurier  | Waterloo  | Databases I                                 |
+| Compsci222 | McGill University              | McGill   | Montreal  | Databases I                                 |
+| CompSci023 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals II            |
+| CompSci023 | University Of Toronto          | UofT     | Toronto   | Computer Science Fundamentals II            |
+| CompSci023 | Concordia University           | Concord  | Montreal  | Computer Science Fundamentals II            |
+| CompSci023 | University of Waterloo         | Waterloo | Waterloo  | Computer Science Fundamentals II            |
+| CompSci023 | McMaster University            | Mac      | Hamilton  | Computer Science Fundamentals II            |
+| CompSci023 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals II            |
+| CompSci023 | Wilfred Laurier University     | Laurier  | Waterloo  | Computer Science Fundamentals II            |
+| CompSci023 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals II            |
+| CompSci011 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals I             |
+| CompSci011 | University Of Toronto          | UofT     | Toronto   | Computer Science Fundamentals I             |
+| CompSci011 | Concordia University           | Concord  | Montreal  | Computer Science Fundamentals I             |
+| CompSci011 | University of Waterloo         | Waterloo | Waterloo  | Computer Science Fundamentals I             |
+| CompSci011 | McMaster University            | Mac      | Hamilton  | Computer Science Fundamentals I             |
+| CompSci011 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals I             |
+| CompSci011 | Wilfred Laurier University     | Laurier  | Waterloo  | Computer Science Fundamentals I             |
+| CompSci011 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals I             |
+| CompSci021 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals I             |
+| CompSci021 | University Of Toronto          | UofT     | Toronto   | Computer Science Fundamentals I             |
+| CompSci021 | Concordia University           | Concord  | Montreal  | Computer Science Fundamentals I             |
+| CompSci021 | University of Waterloo         | Waterloo | Waterloo  | Computer Science Fundamentals I             |
+| CompSci021 | McMaster University            | Mac      | Hamilton  | Computer Science Fundamentals I             |
+| CompSci021 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals I             |
+| CompSci021 | Wilfred Laurier University     | Laurier  | Waterloo  | Computer Science Fundamentals I             |
+| CompSci021 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals I             |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | University Of Toronto          | UofT     | Toronto   | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | Concordia University           | Concord  | Montreal  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | University of Waterloo         | Waterloo | Waterloo  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | McMaster University            | Mac      | Hamilton  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | Wilfred Laurier University     | Laurier  | Waterloo  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | McGill University              | McGill   | Montreal  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals I             |
+| CompSci022 | University Of Toronto          | UofT     | Toronto   | Computer Science Fundamentals I             |
+| CompSci022 | Concordia University           | Concord  | Montreal  | Computer Science Fundamentals I             |
+| CompSci022 | University of Waterloo         | Waterloo | Waterloo  | Computer Science Fundamentals I             |
+| CompSci022 | McMaster University            | Mac      | Hamilton  | Computer Science Fundamentals I             |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals I             |
+| CompSci022 | Wilfred Laurier University     | Laurier  | Waterloo  | Computer Science Fundamentals I             |
+| CompSci022 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals I             |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals II            |
+| CompSci022 | University Of Toronto          | UofT     | Toronto   | Computer Science Fundamentals II            |
+| CompSci022 | Concordia University           | Concord  | Montreal  | Computer Science Fundamentals II            |
+| CompSci022 | University of Waterloo         | Waterloo | Waterloo  | Computer Science Fundamentals II            |
+| CompSci022 | McMaster University            | Mac      | Hamilton  | Computer Science Fundamentals II            |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals II            |
+| CompSci022 | Wilfred Laurier University     | Laurier  | Waterloo  | Computer Science Fundamentals II            |
+| CompSci022 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals II            |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | University Of Toronto          | UofT     | Toronto   | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | Concordia University           | Concord  | Montreal  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | University of Waterloo         | Waterloo | Waterloo  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | McMaster University            | Mac      | Hamilton  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | Wilfred Laurier University     | Laurier  | Waterloo  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | McGill University              | McGill   | Montreal  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | University Of Toronto          | UofT     | Toronto   | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | Concordia University           | Concord  | Montreal  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | University of Waterloo         | Waterloo | Waterloo  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | McMaster University            | Mac      | Hamilton  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | Wilfred Laurier University     | Laurier  | Waterloo  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | McGill University              | McGill   | Montreal  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals I             |
+| CompSci022 | University Of Toronto          | UofT     | Toronto   | Computer Science Fundamentals I             |
+| CompSci022 | Concordia University           | Concord  | Montreal  | Computer Science Fundamentals I             |
+| CompSci022 | University of Waterloo         | Waterloo | Waterloo  | Computer Science Fundamentals I             |
+| CompSci022 | McMaster University            | Mac      | Hamilton  | Computer Science Fundamentals I             |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals I             |
+| CompSci022 | Wilfred Laurier University     | Laurier  | Waterloo  | Computer Science Fundamentals I             |
+| CompSci022 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals I             |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals II            |
+| CompSci022 | University Of Toronto          | UofT     | Toronto   | Computer Science Fundamentals II            |
+| CompSci022 | Concordia University           | Concord  | Montreal  | Computer Science Fundamentals II            |
+| CompSci022 | University of Waterloo         | Waterloo | Waterloo  | Computer Science Fundamentals II            |
+| CompSci022 | McMaster University            | Mac      | Hamilton  | Computer Science Fundamentals II            |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals II            |
+| CompSci022 | Wilfred Laurier University     | Laurier  | Waterloo  | Computer Science Fundamentals II            |
+| CompSci022 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals II            |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | University Of Toronto          | UofT     | Toronto   | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | Concordia University           | Concord  | Montreal  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | University of Waterloo         | Waterloo | Waterloo  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | McMaster University            | Mac      | Hamilton  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | Wilfred Laurier University     | Laurier  | Waterloo  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | McGill University              | McGill   | Montreal  | Modern Survival Skills I: Coding Essentials |
+| Compsci101 | Not A University               | NAU      | Nowhere   | Algorithms and Data Structures              |
+| Compsci101 | University Of Toronto          | UofT     | Toronto   | Algorithms and Data Structures              |
+| Compsci101 | Concordia University           | Concord  | Montreal  | Algorithms and Data Structures              |
+| Compsci101 | University of Waterloo         | Waterloo | Waterloo  | Algorithms and Data Structures              |
+| Compsci101 | McMaster University            | Mac      | Hamilton  | Algorithms and Data Structures              |
+| Compsci101 | University of British Columbia | UBC      | Vancouver | Algorithms and Data Structures              |
+| Compsci101 | Wilfred Laurier University     | Laurier  | Waterloo  | Algorithms and Data Structures              |
+| Compsci101 | McGill University              | McGill   | Montreal  | Algorithms and Data Structures              |
++------------+--------------------------------+----------+-----------+---------------------------------------------+
+144 rows in set (0.00 sec)
+
+ERROR 1054 (42S22) at line 9: Unknown column 'University.Nickname' in 'where clause'
+--------------
+SELECT * FROM NewView WHERE University.Nickname="UofT" ORDER BY WesternCourse.CourseName ASC
+--------------
+
+--------------
+SELECT * FROM University
+--------------
+
++--------------+--------------------------------+-----------+----------+----------+
+| UniversityID | OfficialName                   | City      | Province | Nickname |
++--------------+--------------------------------+-----------+----------+----------+
+| 11           | Not A University               | Nowhere   | NL       | NAU      |
+| 2            | University Of Toronto          | Toronto   | ON       | UofT     |
+| 24           | Concordia University           | Montreal  | QB       | Concord  |
+| 4            | University of Waterloo         | Waterloo  | ON       | Waterloo |
+| 55           | McMaster University            | Hamilton  | ON       | Mac      |
+| 66           | University of British Columbia | Vancouver | BC       | UBC      |
+| 77           | Wilfred Laurier University     | Waterloo  | ON       | Laurier  |
+| 88           | McGill University              | Montreal  | QB       | McGill   |
++--------------+--------------------------------+-----------+----------+----------+
+8 rows in set (0.00 sec)
+
+--------------
+DELETE FROM University WHERE Nickname like "%cord%"
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+SELECT * FROM University
+--------------
+
++--------------+--------------------------------+-----------+----------+----------+
+| UniversityID | OfficialName                   | City      | Province | Nickname |
++--------------+--------------------------------+-----------+----------+----------+
+| 11           | Not A University               | Nowhere   | NL       | NAU      |
+| 2            | University Of Toronto          | Toronto   | ON       | UofT     |
+| 4            | University of Waterloo         | Waterloo  | ON       | Waterloo |
+| 55           | McMaster University            | Hamilton  | ON       | Mac      |
+| 66           | University of British Columbia | Vancouver | BC       | UBC      |
+| 77           | Wilfred Laurier University     | Waterloo  | ON       | Laurier  |
+| 88           | McGill University              | Montreal  | QB       | McGill   |
++--------------+--------------------------------+-----------+----------+----------+
+7 rows in set (0.00 sec)
+
+--------------
+DELETE FROM University WHERE Province="ON"
+--------------
+
+Query OK, 4 rows affected (0.01 sec)
+
+--------------
+SELECT * FROM University
+--------------
+
++--------------+--------------------------------+-----------+----------+----------+
+| UniversityID | OfficialName                   | City      | Province | Nickname |
++--------------+--------------------------------+-----------+----------+----------+
+| 11           | Not A University               | Nowhere   | NL       | NAU      |
+| 66           | University of British Columbia | Vancouver | BC       | UBC      |
+| 88           | McGill University              | Montreal  | QB       | McGill   |
++--------------+--------------------------------+-----------+----------+----------+
+3 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM OtherCourse, University WHERE OtherCourse.UniversityID=University.UniversityID
+--------------
+
++----------------------+------------+--------+-------------+--------------+--------------+--------------------------------+-----------+----------+----------+
+| CourseName           | CourseCode | Weight | YearOffered | UniversityID | UniversityID | OfficialName                   | City      | Province | Nickname |
++----------------------+------------+--------+-------------+--------------+--------------+--------------------------------+-----------+----------+----------+
+| Intro to CompSci     | CompSci293 | 1.0    | 1           | 11           | 11           | Not A University               | Nowhere   | NL       | NAU      |
+| Advanced CompSci     | CompSci499 | 0.5    | 4           | 11           | 11           | Not A University               | Nowhere   | NL       | NAU      |
+| Intro Programming    | CompSci021 | 1.0    | 1           | 66           | 66           | University of British Columbia | Vancouver | BC       | UBC      |
+| Advanced Programming | CompSci022 | 0.5    | 1           | 66           | 66           | University of British Columbia | Vancouver | BC       | UBC      |
+| Using Databases      | CompSci319 | 0.5    | 3           | 66           | 66           | University of British Columbia | Vancouver | BC       | UBC      |
++----------------------+------------+--------+-------------+--------------+--------------+--------------------------------+-----------+----------+----------+
+5 rows in set (0.00 sec)
+
+ERROR 1064 (42000) at line 17: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE OtherCourse.UniversityID="4" OR OtherCourse.UniversityID="77"' at line 1
+--------------
+DELETE FROM OtherCourse,University WHERE OtherCourse.UniversityID="4" OR OtherCourse.UniversityID="77"
+--------------
+
+--------------
+SELECT * FROM OtherCourse,University WHERE OtherCourse.UniversityID=University.UniversityID
+--------------
+
++----------------------+------------+--------+-------------+--------------+--------------+--------------------------------+-----------+----------+----------+
+| CourseName           | CourseCode | Weight | YearOffered | UniversityID | UniversityID | OfficialName                   | City      | Province | Nickname |
++----------------------+------------+--------+-------------+--------------+--------------+--------------------------------+-----------+----------+----------+
+| Intro to CompSci     | CompSci293 | 1.0    | 1           | 11           | 11           | Not A University               | Nowhere   | NL       | NAU      |
+| Advanced CompSci     | CompSci499 | 0.5    | 4           | 11           | 11           | Not A University               | Nowhere   | NL       | NAU      |
+| Intro Programming    | CompSci021 | 1.0    | 1           | 66           | 66           | University of British Columbia | Vancouver | BC       | UBC      |
+| Advanced Programming | CompSci022 | 0.5    | 1           | 66           | 66           | University of British Columbia | Vancouver | BC       | UBC      |
+| Using Databases      | CompSci319 | 0.5    | 3           | 66           | 66           | University of British Columbia | Vancouver | BC       | UBC      |
++----------------------+------------+--------+-------------+--------------+--------------+--------------------------------+-----------+----------+----------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM NewView
+--------------
+
++------------+--------------------------------+----------+-----------+---------------------------------------------+
+| CourseCode | OfficialName                   | Nickname | City      | CourseName                                  |
++------------+--------------------------------+----------+-----------+---------------------------------------------+
+| CompSci022 | Not A University               | NAU      | Nowhere   | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | McGill University              | McGill   | Montreal  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals I             |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals I             |
+| CompSci022 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals I             |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals II            |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals II            |
+| CompSci022 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals II            |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | McGill University              | McGill   | Montreal  | Modern Survival Skills I: Coding Essentials |
+| CompSci033 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals I             |
+| CompSci033 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals I             |
+| CompSci033 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals I             |
+| Compsci222 | Not A University               | NAU      | Nowhere   | Databases I                                 |
+| Compsci222 | University of British Columbia | UBC      | Vancouver | Databases I                                 |
+| Compsci222 | McGill University              | McGill   | Montreal  | Databases I                                 |
+| CompSci023 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals II            |
+| CompSci023 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals II            |
+| CompSci023 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals II            |
+| CompSci011 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals I             |
+| CompSci011 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals I             |
+| CompSci011 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals I             |
+| CompSci021 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals I             |
+| CompSci021 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals I             |
+| CompSci021 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals I             |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | McGill University              | McGill   | Montreal  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals I             |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals I             |
+| CompSci022 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals I             |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals II            |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals II            |
+| CompSci022 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals II            |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | McGill University              | McGill   | Montreal  | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | McGill University              | McGill   | Montreal  | Intro to Coding using Pascal and Fortran    |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals I             |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals I             |
+| CompSci022 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals I             |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Computer Science Fundamentals II            |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Computer Science Fundamentals II            |
+| CompSci022 | McGill University              | McGill   | Montreal  | Computer Science Fundamentals II            |
+| CompSci022 | Not A University               | NAU      | Nowhere   | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | University of British Columbia | UBC      | Vancouver | Modern Survival Skills I: Coding Essentials |
+| CompSci022 | McGill University              | McGill   | Montreal  | Modern Survival Skills I: Coding Essentials |
+| Compsci101 | Not A University               | NAU      | Nowhere   | Algorithms and Data Structures              |
+| Compsci101 | University of British Columbia | UBC      | Vancouver | Algorithms and Data Structures              |
+| Compsci101 | McGill University              | McGill   | Montreal  | Algorithms and Data Structures              |
++------------+--------------------------------+----------+-----------+---------------------------------------------+
+54 rows in set (0.01 sec)
+
+Bye

@@ -18,13 +18,13 @@ SHOW DATABASES
 DROP DATABASE IF EXISTS npattniassign2db
 --------------
 
-Query OK, 4 rows affected (0.11 sec)
+Query OK, 4 rows affected (0.09 sec)
 
 --------------
 CREATE DATABASE npattniassign2db
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.00 sec)
 
 --------------
 GRANT USAGE ON *.* TO 'ta'@'localhost'
@@ -71,7 +71,7 @@ CREATE TABLE WesternCourse(
 	PRIMARY KEY(CourseNumber) )
 --------------
 
-Query OK, 0 rows affected (0.04 sec)
+Query OK, 0 rows affected (0.11 sec)
 
 --------------
 CREATE TABLE University(
@@ -83,7 +83,7 @@ CREATE TABLE University(
 	PRIMARY KEY(UniversityID) )
 --------------
 
-Query OK, 0 rows affected (0.22 sec)
+Query OK, 0 rows affected (0.04 sec)
 
 --------------
 CREATE TABLE OtherCourse(
@@ -95,7 +95,7 @@ CREATE TABLE OtherCourse(
 	FOREIGN KEY(UniversityID) REFERENCES University(UniversityID) ON DELETE SET NULL )
 --------------
 
-Query OK, 0 rows affected (0.10 sec)
+Query OK, 0 rows affected (0.07 sec)
 
 --------------
 CREATE TABLE EquivalentCourses(
@@ -107,7 +107,7 @@ CREATE TABLE EquivalentCourses(
 	FOREIGN KEY(University) REFERENCES University(UniversityID) ON DELETE SET NULL )
 --------------
 
-Query OK, 0 rows affected (0.06 sec)
+Query OK, 0 rows affected (0.05 sec)
 
 --------------
 SHOW TABLES

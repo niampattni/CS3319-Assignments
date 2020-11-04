@@ -30,7 +30,6 @@ CREATE TABLE OtherCourse(
 	Weight CHAR(3) NOT NULL,
 	YearOffered CHAR(1) NOT NULL,
 	UniversityID VARCHAR(2),
-	PRIMARY KEY(CourseCode),
 	FOREIGN KEY(UniversityID) REFERENCES University(UniversityID) ON DELETE SET NULL );
 
 CREATE TABLE EquivalentCourses(
@@ -39,6 +38,5 @@ CREATE TABLE EquivalentCourses(
 	University VARCHAR(2),
 	DateDecided VARCHAR(12) NOT NULL,
 	FOREIGN KEY(WesternCourse) REFERENCES WesternCourse(CourseNumber) ON DELETE SET NULL,
-	FOREIGN KEY(OutsideCourse) REFERENCES OtherCourse(CourseCode) ON DELETE SET NULL,
 	FOREIGN KEY(University) REFERENCES University(UniversityID) ON DELETE SET NULL );
 SHOW TABLES;

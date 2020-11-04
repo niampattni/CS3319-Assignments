@@ -12,13 +12,13 @@ SHOW DATABASES
 | performance_schema |
 | vetoffice          |
 +--------------------+
-5 rows in set (0.00 sec)
+5 rows in set (0.01 sec)
 
 --------------
 DROP DATABASE IF EXISTS npattniassign2db
 --------------
 
-Query OK, 3 rows affected (0.31 sec)
+Query OK, 4 rows affected (0.10 sec)
 
 --------------
 CREATE DATABASE npattniassign2db
@@ -42,7 +42,7 @@ Query OK, 0 rows affected (0.00 sec)
 CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
 --------------
 
-Query OK, 0 rows affected (0.00 sec)
+Query OK, 0 rows affected (0.01 sec)
 
 --------------
 GRANT ALL PRIVILEGES ON npattniassign2db.* TO 'ta'@'localhost'
@@ -67,23 +67,23 @@ CREATE TABLE WesternCourse(
 	CourseName VARCHAR(50) NOT NULL,
 	CourseNumber CHAR(6) NOT NULL,
 	Weight CHAR(3) NOT NULL,
-	Suffix CHAR(1),
+	Suffix VARCHAR(3),
 	PRIMARY KEY(CourseNumber) )
 --------------
 
-Query OK, 0 rows affected (0.05 sec)
+Query OK, 0 rows affected (0.04 sec)
 
 --------------
 CREATE TABLE University(
+	UniversityID VARCHAR(2) NOT NULL,
 	OfficialName VARCHAR(50) NOT NULL,
 	City VARCHAR(20) NOT NULL,
 	Province CHAR(2) NOT NULL,
 	Nickname VARCHAR(20) NOT NULL,
-	UniversityID CHAR(2) NOT NULL,
 	PRIMARY KEY(UniversityID) )
 --------------
 
-Query OK, 0 rows affected (0.06 sec)
+Query OK, 0 rows affected (0.14 sec)
 
 --------------
 CREATE TABLE OtherCourse(
@@ -91,25 +91,23 @@ CREATE TABLE OtherCourse(
 	CourseCode CHAR(10) NOT NULL,
 	Weight CHAR(3) NOT NULL,
 	YearOffered CHAR(1) NOT NULL,
-	UniversityID CHAR(2),
-	PRIMARY KEY(CourseCode),
+	UniversityID VARCHAR(2),
 	FOREIGN KEY(UniversityID) REFERENCES University(UniversityID) ON DELETE SET NULL )
 --------------
 
-Query OK, 0 rows affected (0.05 sec)
+Query OK, 0 rows affected (0.12 sec)
 
 --------------
 CREATE TABLE EquivalentCourses(
 	WesternCourse CHAR(6),
 	OutsideCourse CHAR(10),
-	University CHAR(2),
+	University VARCHAR(2),
 	DateDecided VARCHAR(12) NOT NULL,
 	FOREIGN KEY(WesternCourse) REFERENCES WesternCourse(CourseNumber) ON DELETE SET NULL,
-	FOREIGN KEY(OutsideCourse) REFERENCES OtherCourse(CourseCode) ON DELETE SET NULL,
 	FOREIGN KEY(University) REFERENCES University(UniversityID) ON DELETE SET NULL )
 --------------
 
-Query OK, 0 rows affected (0.27 sec)
+Query OK, 0 rows affected (0.10 sec)
 
 --------------
 SHOW TABLES

@@ -1,7 +1,10 @@
 SHOW DATABASES;
 USE npattniassign2db;
 SELECT * FROM University;
-LOAD DATA LOCAL INFILE "./loaddatafall2020.txt" INTO TABLE University;
+LOAD DATA LOCAL INFILE "./loaddatafall2020.txt" INTO TABLE University 
+	COLUMNS TERMINATED BY ','
+	LINES TERMINATED BY '\n'
+	(UniversityID,OfficialName,City,Province,Nickname);
 SELECT * FROM University;
 
 SELECT * FROM WesternCourse;
@@ -49,7 +52,7 @@ INSERT INTO EquivalentCourses VALUES ("cs2210","CompSci101","77","Jul 12, 1998")
 INSERT INTO EquivalentCourses VALUES ("cs3319","CompSci222","2","Sep 13, 1990");
 INSERT INTO EquivalentCourses VALUES ("cs3319","CompSci319","66","Sep 21, 1987");
 INSERT INTO EquivalentCourses VALUES ("cs2120","CompSci022","2","Dec 10, 2018");
-INSERT INTO EquivalentCourses VALUES ("cd0020","CompSci022","2","Sep 17, 1999");
+INSERT INTO EquivalentCourses VALUES ("cs0020","CompSci022","2","Sep 17, 1999");
 SELECT * FROM EquivalentCourses;
 
 SELECT * FROM EquivalentCourses;
